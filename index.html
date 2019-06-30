@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <title>!!GUESS WHAT LETTER GAME!!</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <link rel="stylesheets" href="style.css">
+
+    
+
+
+<head>
+
+<body>
+
+<style>
+body {
+    https://www.bing.com/images/search?view=detailV2&ccid=73ue6EFc&id=31A7208B2A4C80B97409A4E758DB989ED6A5FD6A&thid=OIP.73ue6EFcPfA_xfdmGfxWrwHaHa&mediaurl=http%3a%2f%2fkittygroups.com%2fwp-content%2fuploads%2f2013%2f03%2fbaby-shower-games-on-guessing.jpg&exph=500&expw=500&q=images+of+guessing&simid=608048281495733345&selectedIndex=8&qpvt=images+of+guessing&ajaxhist=0
+}  
+</style>
+
+
+<h1>!GUESS WHAT LETTER GAME!</h1>
+
+<h2>Guess the letter that I am thinking of?</h2>
+
+<p>Wins: <span id = "numWins"></span></p>
+
+<p>Loses: <span id = "numLoses"></span></p>
+
+<p>Chances left: <span id = "numGuesses"></span></p>
+
+<p>Your guesses so far: <span id = "playersGuess"></span></p>
+
+
+<script src="psychic.js"></script>
+
+
+<script type="text/javascript">
+var lettersGuessed = [];
+var guessesLeft = 10;
+var wins = 0;
+var loses = 0;
+
+//use Math.random method along with String.fromCharCode method to generate a random letter
+var computerGuess =
+    String.fromCharCode(
+        Math.round(Math.random() * 26) + 97
+    );
+
+console.log(computerGuess);
+//function to capture user's keyboard input and make the input lowercase
+document.onkeydown = function(event) {
+    var keyPress = (String.fromCharCode(event.keyCode)).toLowerCase();
+
+    addLetter(keyPress);
+
+}
+
+//function to catch repeat letters and/or add players guess to lettersGuessed 
+function addLetter (usersKeypress) {
+
+
+    var repeatGuess = lettersGuessed.some(function(item){
+        return item === usersKeypress;
+    })
+
+    //alert player if the above code is true.
+    if (repeatGuess) {
+        alert(usersKeypress + ", You already guessed that letter. Try again! ");
+
+        //if it is not a repeat guess, check if it's in word
+    } else {
+        lettersGuessed.push(usersKeypress);
+        console.log(lettersGuessed);
+
+        //show user's input in browser
+        showLettersGuessed();
+        //input match to computer guess
+        guessMatch(usersKeypress);
+    }
+
+}
+
+//function showing letters guessed
+function showLettersGuessed() {
+    var tempStr = lettersGuessed.join(", ");
+    document.getElementById("playersGuess").innerHTML = tempStr;
+}
+
+function guessMatch (character) {
+
+    console.log(character);
+    console.log(computerGuess);
+
+    if (character === computerGuess) {
+
+        alert(" You win! ");
+        wins = wins + 1;
+        showWins();      
+
+    } else if (guessesLeft === 0) {
+        alert(" Sorry You Lost. Want to Play Again? ");
+        resetVariables ();
+
+    } else {
+        guessesLeft = guessesLeft - 1;
+        showGuessesRemaining();
+    }
+
+    if (character !== computerGuess) {
+        alert(" You Missed! ");
+        loses = loses + 1;
+        showLoses();
+    }
+}
+
+//function showing wins
+function showWins() {
+    document.getElementById("numWins").innerHTML = wins;
+}
+
+//function showing loses
+function showLoses() {
+    document.getElementById("numloses").innerHTML = Loses;
+}
+
+//function showing guesses remaining
+function showGuessesRemaining() {
+    document.getElementById("numGuesses").innerHTML = guessesLeft;
+}
+
+
+function resetVariables () {
+    lettersGuessed = [];
+    guessesLeft = 10;
+}
+
+function startGame() {
+    showGuessesRemaining();
+    showWins();
+}
+
+
+
+startGame();
+
+</script>
+
+
+</body>
+</html>
+
